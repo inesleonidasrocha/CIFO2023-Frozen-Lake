@@ -2,6 +2,11 @@ from charles.charles import Population, Individual
 from charles.search import hill_climb, sim_annealing
 from copy import deepcopy
 from data.ks_data import weights, values, capacity
+from charles.selection import fps, tournament_sel
+from charles.mutation import binary_mutation
+from charles.crossover import single_point_co
+from random import random
+from operator import attrgetter
 
 
 def get_fitness(self):
@@ -43,7 +48,10 @@ def get_neighbours(self):
 Individual.get_fitness = get_fitness
 Individual.get_neighbours = get_neighbours
 
-pop = Population(size=1, optim="max", sol_size=len(values), valid_set=[0, 1], replacement=True)
+pop = Population(size=20, optim="max", sol_size=len(values), valid_set=[0, 1], replacement=True)
+pop.evolve(gens=100,select=tournament_sel,mutate=binary_mutation,crossover=single_point_co,xc_prob=0.9,mut_prob=0.2,elitism=True)
 
-hill_climb(pop)
-sim_annealing(pop)
+
+
+
+

@@ -1,8 +1,7 @@
 from copy import deepcopy
 
 from charles.charles import Population, Individual
-from charles.search import hill_climb, sim_annealing
-from data.tsp_data import distance_matrix, cities
+from data.tsp_data import distance_matrix
 
 
 def get_fitness(self):
@@ -27,8 +26,8 @@ def get_neighbours(self):
     """
     n = [deepcopy(self.representation) for i in range(len(self.representation) - 1)]
 
-    for index, neighbour in enumerate(n):
-        neighbour[index], neighbour[index + 1] = neighbour[index + 1], neighbour[index]
+    for count, i in enumerate(n):
+        i[count], i[count + 1] = i[count + 1], i[count]
 
     n = [Individual(i) for i in n]
     return n
@@ -40,11 +39,10 @@ Individual.get_neighbours = get_neighbours
 
 pop = Population(
     size=1,
-    sol_size=len(cities),
-    valid_set=[i for i in range(len(cities))],
-    # for traveling sales person we don't want repetitions o replacement = false
+    sol_size=len(distance_matrix[0]),
+    valid_set=[i for i in range(len(distance_matrix[0]))],
     replacement=False,
     optim="min")
 
-#hill_climb(pop)
-sim_annealing(pop)
+# hill_climb(pop)
+# sim_annealing(pop)
