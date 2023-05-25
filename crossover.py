@@ -17,8 +17,26 @@ def single_point_co(p1, p2):
     offspring2 = p2[:co_point] + p1[co_point:]
 
     return offspring1, offspring2
+    
+def arithmetic_xo(p1, p2):
+    """Implementation of arithmetic crossover/geometric crossover with constant alpha.
 
+    Args:
+        p1 (Individual): First parent for crossover.
+        p2 (Individual): Second parent for crossover.
 
+    Returns:
+        Individuals: Two offspring, resulting from the crossover.
+    """
+    alpha = uniform(0, 1)
+    o1 = [None] * len(p1)
+    o2 = [None] * len(p1)
+    for i in range(len(p1)):
+        o1[i] = int(round(p1[i] * alpha + (1-alpha) * p2[i],0))
+        o2[i] = int(round(p2[i] * alpha + (1-alpha) * p1[i],0))
+    return o1, o2
+
+#---------------------------DOESN'T WORK YET ----------------------------
 def cycle_xo(p1, p2):
     """Implementation of cycle crossover.
 
@@ -113,23 +131,7 @@ def pmx(p1, p2):
     return o1, o2
 
 
-def arithmetic_xo(p1, p2):
-    """Implementation of arithmetic crossover/geometric crossover with constant alpha.
 
-    Args:
-        p1 (Individual): First parent for crossover.
-        p2 (Individual): Second parent for crossover.
-
-    Returns:
-        Individuals: Two offspring, resulting from the crossover.
-    """
-    alpha = uniform(0, 1)
-    o1 = [None] * len(p1)
-    o2 = [None] * len(p1)
-    for i in range(len(p1)):
-        o1[i] = int(round(p1[i] * alpha + (1-alpha) * p2[i],0))
-        o2[i] = int(round(p2[i] * alpha + (1-alpha) * p1[i],0))
-    return o1, o2
 
 
 

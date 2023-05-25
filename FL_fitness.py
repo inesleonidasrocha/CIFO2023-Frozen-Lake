@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 
 from charles import Population, Individual
 '''from charles.selection import roulette_selection
@@ -110,19 +110,4 @@ def printings(done, representation, action, same_position, status, fitness, puni
 # Monkey Patching
 Individual.get_fitness = get_fitness
 
-'''pop = Population(
-    size=50,
-    optim="max",
-    sol_size=16,
-    valid_set=[0, 1, 2, 3],
-    replacement=True,
-)
-for i in range(30):
-    generations_fitness = []
-    pop.evolve(gens=100, 
-            xo_prob=0.9, 
-            mut_prob=0.2, 
-            select=roulette_selection,
-            mutate=inversion_mutation, 
-            crossover=arithmetic_xo,
-            elitism=False)'''
+ 
