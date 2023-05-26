@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from charles import Population, Individual
 from selection import roulette_selection, tournament_sel
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import pmx, cycle_xo, arithmetic_xo, single_point_co
+from crossover import arithmetic_xo, single_point_co, uniform_xo
 from FL_fitness import get_fitness
 
 # Individual Monkey Patching
@@ -62,7 +62,8 @@ def run_experiment(population_size,
     # I tried with 100 generations, and fitness doesn't improve after 60 generations 
 experiments = [
     [50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,uniform_xo,False,True,False]
+    #[50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
     #[50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False]
 ]
 

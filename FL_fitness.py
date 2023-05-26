@@ -1,4 +1,5 @@
-import gym
+import gymnasium as gym
+#import gym
 
 from charles import Population, Individual
 '''from charles.selection import roulette_selection
