@@ -1,15 +1,15 @@
-import gymnasium as gym
+import gym
 
 from charles import Population, Individual
 '''from charles.selection import roulette_selection
 from charles.mutation import inversion_mutation
 from charles.crossover import pmx, cycle_xo, arithmetic_xo'''
 
-def get_fitness(self):
+def get_fitness(self, slippery):
     # Create the FrozenLake environment
     # Render mode is only for visualization purposes, so it can be removed
     # env = gym.make('FrozenLake-v1', render_mode="human", is_slippery=False)
-    env = gym.make('FrozenLake-v1', is_slippery=True)
+    env = gym.make('FrozenLake-v1', is_slippery=slippery)
     
     # Set the initial state
     env.reset()
@@ -73,7 +73,7 @@ def get_fitness(self):
                 fitness -= 1
             state = new_state
         elif new_state in Goal:
-            fitness += 0 # We don't need to add more fitness because the optimum fitness will be -6
+            fitness += 0 # We don't need to add more fitness because the optimum fitness will be -5
             status = "Success"        
 
         # End the simulation when the game is over
@@ -106,8 +106,3 @@ def printings(done, representation, action, same_position, status, fitness, puni
             print(f"Agent ran out of steps!")
             print(f"Run-out fitness: {fitness}")
         print("------------------------------------------------------------")
-
-# Monkey Patching
-Individual.get_fitness = get_fitness
-
- 

@@ -10,6 +10,7 @@ class Individual:
         size=None,
         replacement=True,
         valid_set=None,
+        slippery=None,
     ):
         if representation is None:
             if replacement is True:
@@ -18,7 +19,7 @@ class Individual:
                 self.representation = sample(valid_set, size)
         else:
             self.representation = representation
-        self.fitness = self.get_fitness()
+        self.fitness = self.get_fitness(slippery)
 
     def get_fitness(self):
         raise Exception("You need to monkey patch the fitness path.")
@@ -50,6 +51,7 @@ class Population:
                     size=kwargs["sol_size"],
                     replacement=kwargs["replacement"],
                     valid_set=kwargs["valid_set"],
+                    slippery=kwargs["slippery"],
                 )
             )
 
@@ -58,7 +60,6 @@ class Population:
         generations_fitness = []
         
         for i in range(gens):
-            print(f"Generation {i+1}")
             new_pop = []
 
             if elitism:
@@ -101,10 +102,12 @@ class Population:
 
             if self.optim == "max":
                 max_fitness = max(self, key=attrgetter("fitness")).fitness
-                print(f'Best Individual: {max_fitness}')
                 generations_fitness.append(max_fitness)
             elif self.optim == "min":
-                print(f'Best Individual: {min(self, key=attrgetter("fitness"))}')
+                min_fitness = min(self, key=attrgetter("fitness")).fitness
+                generations_fitness.append(max_fitness)
+                
+        return generations_fitness
 
     def __len__(self):
         return len(self.individuals)
