@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from charles import Population, Individual
 from selection import roulette_selection, tournament_sel, rank_selection
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import arithmetic_xo, single_point_co, uniform_xo
+from crossover import arithmetic_xo, single_point_co, mask_xo, uniform_xo, multi_point_crossover,heuristic_xo
 from FL_fitness import get_fitness
 
 # Individual Monkey Patching
@@ -36,7 +36,7 @@ def run_experiment(population_size,
             sol_size=sol_size,
             valid_set=valid_set,
             replacement=replacement,
-            slippery=slippery,
+            slippery=slippery
         )
 
         # Evolve the population for 30 iterations

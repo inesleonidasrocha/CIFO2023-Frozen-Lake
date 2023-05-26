@@ -36,6 +36,9 @@ class Individual:
     def __setitem__(self, position, value):
         self.representation[position] = value
 
+    def copy(self):
+        return Individual(self.representation.copy(), self.fitness)
+
     def __repr__(self):
         return f"Individual(size={len(self.representation)}); Fitness: {self.fitness}"
 
