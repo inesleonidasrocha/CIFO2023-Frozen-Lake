@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from charles import Population, Individual
 from selection import roulette_selection, tournament_sel, rank_selection
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import arithmetic_xo, single_point_co
+from crossover import arithmetic_xo, single_point_co, mask_xo, uniform_xo, multi_point_crossover
 from FL_fitness import get_fitness
 
 # Individual Monkey Patching
@@ -61,13 +61,15 @@ def run_experiment(population_size,
 # Experiments configuration
     # I tried with 100 generations, and fitness doesn't improve after 60 generations 
 experiments = [
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,multi_point_crossover,False,True,False],
+   # [50,100,0.9,0.2,roulette_selection,inversion_mutation,mask_xo,False,True,False],
+   # [50,100,0.9,0.2,roulette_selection,inversion_mutation,uniform_xo,False,True,False],
     [50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,rank_selection,inversion_mutation,arithmetic_xo,False,True,False],
+   # [50,100,0.9,0.2,roulette_selection,inversion_mutation,single_point_co,False,True,False],
     
-    [50,100,0.9,0.2,roulette_selection,swap_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,rank_selection,swap_mutation,arithmetic_xo,False,True,False]
+    #[50,100,0.9,0.2,roulette_selection,swap_mutation,arithmetic_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
+    #[50,100,0.9,0.2,rank_selection,swap_mutation,arithmetic_xo,False,True,False]
 ]
 
 # create a list using the columns of the experiments list
