@@ -1,9 +1,9 @@
 import time
 import matplotlib.pyplot as plt
 from charles import Population, Individual
-from selection import roulette_selection, tournament_sel
+from selection import roulette_selection, tournament_sel, rank_selection
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import arithmetic_xo, single_point_co, uniform_xo
+from crossover import arithmetic_xo, single_point_co
 from FL_fitness import get_fitness
 
 # Individual Monkey Patching
@@ -26,7 +26,7 @@ def run_experiment(population_size,
                    ):
 
     iterations_fitness = []
-    for i in range(50):
+    for i in range(10):
         start_time = time.time()
         
         # Create a population
@@ -62,9 +62,12 @@ def run_experiment(population_size,
     # I tried with 100 generations, and fitness doesn't improve after 60 generations 
 experiments = [
     [50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,uniform_xo,False,True,False]
-    #[50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
-    #[50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False]
+    [50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,rank_selection,inversion_mutation,arithmetic_xo,False,True,False],
+    
+    [50,100,0.9,0.2,roulette_selection,swap_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,rank_selection,swap_mutation,arithmetic_xo,False,True,False]
 ]
 
 # create a list using the columns of the experiments list
@@ -85,10 +88,21 @@ variable_list = [population_size, generations, crossover_probability, mutation_p
                  selection, mutation, crossover, elitism, replacement, slippery]
 
 # find the first variable that has more than one unique value
+selection_list = []
 for variable in variable_list:
     if len(set(variable)) >= 2:
-        experiments_label = variable
-        break
+        selection_list.append(variable)
+
+# 
+label_list = []
+for l in range(len(selection_list[0])):
+    label = ([v[l] for v in selection_list])
+    # create a string with the elements in the list
+    label = "/".join(label)
+    # insert label in a list
+    label_list.append(label)
+    
+
 
 # Run the experiments
 for exp in experiments:
@@ -109,9 +123,8 @@ for exp in experiments:
 # Plot the fitness by experiment
 for exp in fitness_experiments:
     plt.plot(exp)
-plt.xlabel("Generation")
-# for each experiement, set the name of the experiment dinamically
-plt.legend([f"{experiments_label[i]}" for i in range(len(experiments_label))])
+plt.xlabel("Generation") 
+plt.legend([f"{label_list[i]}" for i in range(len(label_list))])
 plt.ylabel("Fitness")
 plt.title("Fitness by Generation")
 plt.show()
