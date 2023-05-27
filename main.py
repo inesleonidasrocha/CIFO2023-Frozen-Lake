@@ -1,10 +1,10 @@
 import time
 import matplotlib.pyplot as plt
 from charles import Population, Individual
-from selection import roulette_selection, tournament_sel, rank_selection
-from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import arithmetic_xo, single_point_co, mask_xo, uniform_xo, multi_point_crossover,heuristic_xo_v1,heuristic_xo_v2, heuristic_xo
 from FL_fitness import get_fitness
+from selection import roulette_selection, tournament_sel, rank_selection
+from crossover import arithmetic_xo, single_point_xo, multi_point_xo, uniform_xo, uniform_mask_xo, heuristic_xo
+from mutation import scramble_mutation, swap_mutation, inversion_mutation
 
 # Individual Monkey Patching
 Individual.get_fitness = get_fitness
@@ -36,7 +36,6 @@ def run_experiment(population_size, generations, crossover_probability, mutation
 
     return iterations_fitness_average
 
-# Experiments configuration
 # Experiments configuration
 experiments = [# [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, single_point_xo, False, True, False],
@@ -127,7 +126,7 @@ for l in range(len(selection_list[0])):
     
 # Run the experiments
 for exp in experiments:
-    print(f"Running experiment: {experiments.index(exp)+1}")
+    print(f"Running experiment: {experiments.index(exp) + 1}")
     fitness_experiments.append(run_experiment(population_size = exp[0],
                                               generations = exp[1],
                                               crossover_probability = exp[2],
