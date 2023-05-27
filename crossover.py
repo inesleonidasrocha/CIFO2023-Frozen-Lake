@@ -1,8 +1,6 @@
 import random
 from random import randint, sample, uniform
 import numpy as np
-from FL_fitness import get_fitness
-from charles import Individual
 
 
 def arithmetic_xo(p1, p2):

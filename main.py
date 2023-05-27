@@ -1,5 +1,6 @@
 import time
 import matplotlib.pyplot as plt
+import numpy as np
 from charles import Population, Individual
 from selection import roulette_selection, tournament_sel, rank_selection
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
@@ -53,22 +54,25 @@ def run_experiment(population_size,
         print(f"Iteration {i+1} time: {round(iteration_time,2)} seconds")
         
     # Average iterations by generation
-    iterations_fitness_average = list(zip(*iterations_fitness))
-    iterations_fitness_average = [round(sum(iteration)/len(iteration),0) for iteration in iterations_fitness_average]
+    iterations_fitness_gen = list(zip(*iterations_fitness))
+    iterations_fitness_average = [int(round(sum(iteration)/len(iteration),0)) for iteration in iterations_fitness_gen]
+    
+    # Get the standard deviation of the iterations
+    iterations_fitness_std = [int(round(np.std(iteration),0)) for iteration in iterations_fitness_gen]
 
-    return iterations_fitness_average
+    return iterations_fitness_average, iterations_fitness_std
 
 # Experiments configuration
 experiments = [
     [50, 100, 0.8, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, True, True, False],
     [50, 100, 0.8, 0.2, tournament_sel, swap_mutation, arithmetic_xo, True, True, False],
     [50, 100, 0.8, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, True, True, False],
-    [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, True, True, False]
+    #[50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, True, True, False],
+    #[50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, True, True, False],
+    #[50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, True, True, False],
+    #[50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, True, True, False],
+    #[50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, True, True, False],
+    #[50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, True, True, False]
 ]
 
 # create a list using the columns of the experiments list
@@ -118,22 +122,57 @@ for exp in experiments:
                                               elitism = exp[7],
                                               replacement = exp[8],
                                               slippery = exp[9]))
+    print(f"Average fitness: {fitness_experiments[-1][0]}")
     print(f"Experiment {experiments.index(exp)+1} finished")
     print("--------------------------------------------------")
 
+# Plot the results
+# Extract avg and std values from the fitness_experiments
+avg = [exp[0] for exp in fitness_experiments]
+std = [exp[1] for exp in fitness_experiments]
+
+# Calculate the upper and lower bounds for the shaded area
+upper_bound = [ [a + s for a, s in zip(avg[i], std[i])] for i in range(len(avg))]
+lower_bound = [ [a - s for a, s in zip(avg[i], std[i])] for i in range(len(avg))]
+
+# Create the figure and axis
+fig, ax = plt.subplots(figsize=(12, 6))
+
 # Plot the fitness by experiment
+for a in range(len(avg)):
+    # Plot the average line
+    ax.plot(range(len(avg[a])), avg[a], label=label_list[a])
+    # Fill the area between the bounds
+    ax.fill_between(range(len(avg[a])), lower_bound[a], upper_bound[a], alpha=0.2)
+
+# Set labels and title
+ax.set_xlabel('Generations')
+ax.set_ylabel('Fitness')
+ax.set_title('Fitness Lanscape')
+
+# Only display average line in the legend
+#ax.legend(label_list,bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+handles, labels = ax.get_legend_handles_labels()
+ax.legend(handles[:len(avg)], labels[:len(avg)], bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+
+# set the left and right margins
+plt.subplots_adjust(left=0.08, right=0.73)
+
+# Show the plot
+plt.show()
+
+
+
+'''# Plot the fitness by experiment
 for exp in fitness_experiments:
     plt.plot(exp)
     
 plt.xlabel("Generation") 
 plt.ylabel("Fitness")
-plt.title("Fitness by Generation")
+plt.title("Fitness Lanscape")
 # set the left and right margins
 plt.subplots_adjust(left=0.08, right=0.73)
 # add a legend outside the plot
 plt.legend(label_list, bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
 # show the plot
-plt.show()
-
-
-    
+plt.show()'''
