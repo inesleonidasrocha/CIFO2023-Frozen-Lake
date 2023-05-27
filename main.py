@@ -1,6 +1,7 @@
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from charles import Population, Individual
 from FL_fitness import get_fitness
 from selection import roulette_selection, tournament_sel, rank_selection
@@ -43,33 +44,33 @@ def run_experiment(population_size, generations, crossover_probability, mutation
 # Experiments configuration
 experiments = [[50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
                [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, multi_point_xo, False, True, False],
+               [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, multi_point_xo, False, True, False],
+               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, multi_point_xo, False, True, False]
+               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, heuristic_xo, False, True, False]
 
                # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, multi_point_xo, False, True, False],
+               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, multi_point_xo, False, True, False],
+               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, multi_point_xo, False, True, False]
+               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, heuristic_xo, False, True, False]
 
                # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, multi_point_xo, False, True, False],
+               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, multi_point_xo, False, True, False],
+               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, heuristic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, multi_point_xo, False, True, False]
+               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, heuristic_xo, False, True, False]
 
                # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
@@ -137,6 +138,9 @@ if any(len(set(variable)) > 1 for variable in variable_list):
 else:
     label_list = ["Experiment " + str(len(experiments))]
 
+# Create the dataframe to save the results with two columns (Experiment and Fitness)
+df_results = pd.DataFrame(columns = ["Experiment", "Fitness"])
+
 # Run the experiments
 for exp in experiments:
     print(f"Running experiment: {experiments.index(exp) + 1}")
@@ -150,11 +154,19 @@ for exp in experiments:
                                               elitism = exp[7],
                                               replacement = exp[8],
                                               slippery = exp[9]))
+    # Calculate the overall fitness of the last generation of the experiment
+    # and save it in the dataframe
     fitness_overall = int(round(np.mean(fitness_experiments[-1][0]),0))
-    print(f"Average fitness: {fitness_overall}")
+    experiment = experiments.index(exp) + 1
+    # Create a dictionary with the values
+    new_data = pd.DataFrame({"Experiment": [experiment], "Fitness": [fitness_overall]})
+    # Append the dictionary to the DataFrame
+    df_results = pd.concat([df_results, new_data], ignore_index=True)
     print(f"Experiment {experiments.index(exp)+1} finished")
     print("--------------------------------------------------")
-
+    
+print(df_results)
+    
 '''# Plot the results
 # Extract avg and std values from the fitness_experiments
 avg = [exp[0] for exp in fitness_experiments]
