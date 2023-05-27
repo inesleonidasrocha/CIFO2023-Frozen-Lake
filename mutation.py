@@ -1,9 +1,8 @@
-import random
-from random import randint, sample
-
+from random import random, randint, sample
 
 def scramble_mutation(individual):
-    """Scrambled mutation for a GA individual. Scrambles a portion of the representation.
+    """
+    Scrambled mutation for a GA individual. Scrambles a portion of the representation.
 
     Args:
         individual (Individual): A GA individual from charles.py
@@ -11,7 +10,7 @@ def scramble_mutation(individual):
     Returns:
         Individual: Mutated Individual
     """
-    #here we chose a random window 
+    # Here we chose a random window 
     mut_indexes = sample(range(0, len(individual)), 2)
     mut_indexes.sort()
     # Scramble the selected section       
@@ -20,7 +19,8 @@ def scramble_mutation(individual):
 
 
 def swap_mutation(individual):
-    """Swap mutation for a GA individual. Swaps the bits.
+    """
+    Swap mutation for a GA individual. Swaps the bits.
 
     Args:
         individual (Individual): A GA individual from charles.py
@@ -34,7 +34,8 @@ def swap_mutation(individual):
 
 
 def inversion_mutation(individual):
-    """Inversion mutation for a GA individual. Reverts a portion of the representation.
+    """
+    Inversion mutation for a GA individual. Reverts a portion of the representation.
 
     Args:
         individual (Individual): A GA individual from charles.py
@@ -46,22 +47,3 @@ def inversion_mutation(individual):
     mut_indexes.sort()
     individual[mut_indexes[0]:mut_indexes[1]] = individual[mut_indexes[0]:mut_indexes[1]][::-1]
     return individual
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
