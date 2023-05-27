@@ -91,22 +91,22 @@ experiments = [# [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmet
                # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, arithmetic_xo, True, True, False],
                # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, arithmetic_xo, True, True, False]
 
-               [50, 100, 0.8, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False]
+               # [50, 100, 0.8, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
+               # [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False]
                ]
 
-# List using the columns of the experiments list, this is done to make the code more readable
-population_size = [exp[0] for exp in experiments]
-generations = [exp[1] for exp in experiments]
-crossover_probability = [exp[2] for exp in experiments]
-mutation_probability = [exp[3] for exp in experiments]
+# List using the columns of the experiments list, this is done to make the labels more readable
+population_size = ["pop = " + str(exp[0]) for exp in experiments]
+generations = ["gen = " + str(exp[1]) for exp in experiments]
+crossover_probability = ["co = " + str(exp[2]) for exp in experiments]
+mutation_probability = ["mut = " + str(exp[3]) for exp in experiments]
 selection = [exp[4].__name__ for exp in experiments]
 mutation = [exp[5].__name__ for exp in experiments]
 crossover = [exp[6].__name__ for exp in experiments]
@@ -145,7 +145,7 @@ for exp in experiments:
     print(f"Experiment {experiments.index(exp)+1} finished")
     print("--------------------------------------------------")
 
-# Plot the results
+'''# Plot the results
 # Extract avg and std values from the fitness_experiments
 avg = [exp[0] for exp in fitness_experiments]
 std = [exp[1] for exp in fitness_experiments]
@@ -178,21 +178,25 @@ ax.legend(handles[:len(avg)], labels[:len(avg)], bbox_to_anchor=(1.05, 1), loc='
 plt.subplots_adjust(left=0.08, right=0.73)
 
 # Show the plot
-plt.show()
+plt.show()'''
 
 
 
-'''# Plot the fitness by experiment
-for exp in fitness_experiments:
+# Plot the fitness by experiment
+
+plt.subplots(figsize=(12, 6))
+
+avg = [exp[0] for exp in fitness_experiments]
+
+for exp in avg:
     plt.plot(exp)
-    
-plt.title("Fitness by Generation")
+
 plt.xlabel("Generation") 
 plt.ylabel("Fitness")
 plt.title("Fitness Lanscape")
 # set the left and right margins
-plt.subplots_adjust(left=0.08, right=0.73)
+plt.subplots_adjust(left=0.08, right=0.6)
 # Add a legend outside the plot
 plt.legend(label_list, bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
 # show the plot
-plt.show()'''
+plt.show()
