@@ -1,12 +1,13 @@
-import gymnasium as gym
-#import gym
+import gym
 
 from charles import Population, Individual
 
 def get_fitness(self, slippery):
-    # Create the FrozenLake environment
+    
     # Render mode is only for visualization purposes, so it can be removed
     # env = gym.make('FrozenLake-v1', render_mode="human", is_slippery=False)
+    
+    # Create the FrozenLake environment
     env = gym.make('FrozenLake-v1', is_slippery=slippery)
     
     # Set the initial state

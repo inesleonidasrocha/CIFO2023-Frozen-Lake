@@ -1,10 +1,9 @@
-import random
-from random import randint, sample, uniform
+from random import randint, sample, uniform, random
 import numpy as np
 
-
 def arithmetic_xo(p1, p2):
-    """Implementation of arithmetic crossover/geometric crossover with constant alpha.
+    """
+    Implementation of arithmetic crossover/geometric crossover with constant alpha.
 
     Args:
         p1 (Individual): First parent for crossover.
@@ -21,8 +20,10 @@ def arithmetic_xo(p1, p2):
         o2[i] = int(round(p2[i] * alpha + (1-alpha) * p1[i],0))
     return o1, o2
 
-def single_point_co(p1, p2, co_point=None):
-    """Implementation of single point crossover.
+
+def single_point_xo(p1, p2, co_point=None):
+    """
+    Implementation of single point crossover.
 
     Args:
         p1 (Individual): First parent for crossover.
@@ -39,7 +40,8 @@ def single_point_co(p1, p2, co_point=None):
 
     return o1, o2
 
-def multi_point_crossover(p1, p2): #num_points):
+
+def multi_point_xo(p1, p2): #num_points):
     num_points = 5  # Number of crossover points
     
     xo_indexes = sorted(sample(range(0, len(p1)), num_points))
@@ -48,9 +50,10 @@ def multi_point_crossover(p1, p2): #num_points):
     o2 = p2.copy()
     
     for i in xo_indexes:
-        o1, o2 = single_point_co(o1, o2, i)  
+        o1, o2 = single_point_xo(o1, o2, i)  
         
     return o1, o2
+
 
 def uniform_xo(p1, p2): 
     for i in range(len(p1)):
@@ -61,10 +64,11 @@ def uniform_xo(p1, p2):
     
     return p1,p2
 
+
 def crossover_mask(chrom_len):
     return np.random.rand(chrom_len) >= 0.5
 
-def mask_xo(p1,p2):    
+def uniform_mask_xo(p1,p2):    
     mask = crossover_mask(len(p1))
 
     for i in range(len(p1)):
@@ -74,41 +78,8 @@ def mask_xo(p1,p2):
             p2[i] = aux
     return p1,p2
 
-def heuristic_xo(p1, p2):
-    
-    def get_heuristic_offspring(p1, p2):
-        # Calculate weight based on fitness difference
-        fitness_diff = abs(p1.fitness - p2.fitness)
-        w = 1 - fitness_diff / min(p1.fitness, p2.fitness)
-        
-        offspring = []
-        
-        # Loop through each gene
-        for i in range(len(p1)):
-            # Favor the better parent for that gene
-            if p1[i] == p2[i]:
-                offspring.append(p1[i])
-            elif p1.fitness < p2.fitness:
-                offspring.append(p1[i])
-            else:
-                offspring.append(p2[i])
-                
-        # Apply weighted average for genes that differ        
-        for i in range(len(p1)):
-            if p1[i] != p2[i]:
-                a = w * p1[i] + (1-w) * p2[i]
-                if a > 3:
-                    offspring[i] = 3
-                else:
-                    offspring[i] = int(abs(round(a,0)))
-                
-        return offspring
 
-    o1, o2 = get_heuristic_offspring(p1, p2), get_heuristic_offspring(p1, p2)
-    return o1, o2
-    
-    
-def heuristic_xo_v1(p1, p2):
+def heuristic_xo(p1, p2):
     
     def get_heuristic_offspring_v1(p1, p2):
         offspring = []
@@ -126,37 +97,3 @@ def heuristic_xo_v1(p1, p2):
 
     o1, o2 = get_heuristic_offspring_v1(p1, p2), get_heuristic_offspring_v1(p1, p2)
     return o1, o2
-
-def heuristic_xo_v2(p1, p2):
-    
-    def get_heuristic_offspring_v2(p1, p2):
-        offspring = []
-        crossover_probability = 0.5
-        for i in range(len(p1)):
-            if random.random() < crossover_probability:
-                offspring.append(p1[i])  # Select gene from p1
-            else:
-                offspring.append(p2[i])  # Select gene from p2
-        return offspring
-
-    o1, o2 = get_heuristic_offspring_v2(p1, p2), get_heuristic_offspring_v2(p1, p2)
-    return o1, o2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
