@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from charles import Population, Individual
 from selection import roulette_selection, tournament_sel, rank_selection
 from mutation import inversion_mutation, swap_mutation, scramble_mutation
-from crossover import arithmetic_xo, single_point_co, mask_xo, uniform_xo, multi_point_crossover,heuristic_xo
+from crossover import arithmetic_xo, single_point_co, mask_xo, uniform_xo, multi_point_crossover,heuristic_xo_v1,heuristic_xo_v2, heuristic_xo
 from FL_fitness import get_fitness
 
 # Individual Monkey Patching
@@ -26,7 +26,7 @@ def run_experiment(population_size,
                    ):
 
     iterations_fitness = []
-    for i in range(200):
+    for i in range(100):
         start_time = time.time()
         
         # Create a population
@@ -60,15 +60,15 @@ def run_experiment(population_size,
 
 # Experiments configuration
 experiments = [
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,heuristic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
-    #[50,100,0.9,0.2,tournament_sel,inversion_mutation,uniform_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo_v1,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo_v2,False,True,False],
     
-    #[50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
-    #[50,100,0.9,0.2,tournament_sel,swap_mutation,single_point_co,False,True,False],
-    #[50,100,0.9,0.2,tournament_sel,swap_mutation,uniform_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,single_point_co,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,uniform_xo,False,True,False],
 
-    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,arithmetic_xo,False,True,False],
+    [50,100,0.9,0.2,roulette_selection,inversion_mutation,multi_point_crossover,False,True,False],
     #[50,100,0.9,0.2,tournament_sel,scramble_mutation,single_point_co,False,True,False],
     #[50,100,0.9,0.2,tournament_sel,scramble_mutation,uniform_xo,False,True,False],
 ]
@@ -126,13 +126,16 @@ for exp in experiments:
 # Plot the fitness by experiment
 for exp in fitness_experiments:
     plt.plot(exp)
+    
 plt.xlabel("Generation") 
 plt.ylabel("Fitness")
 plt.title("Fitness by Generation")
 # set the left and right margins
 plt.subplots_adjust(left=0.08, right=0.73)
 # add a legend
-plt.legend([f"{label_list[i]}" for i in range(len(label_list))],bbox_to_anchor=(1, 0.5))
+#plt.legend([f"{label_list[i]}" for i in range(len(label_list))],bbox_to_anchor=(1, 0.5))
+# add a legend outside the plot
+plt.legend(label_list, bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
 # show the plot
 plt.show()
 

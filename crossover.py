@@ -1,3 +1,4 @@
+import random
 from random import randint, sample, uniform
 import numpy as np
 from FL_fitness import get_fitness
@@ -77,7 +78,7 @@ def mask_xo(p1,p2):
 
 def heuristic_xo(p1, p2):
     
-    def heuristic_xo_(p1, p2):
+    def get_heuristic_offspring(p1, p2):
         # Calculate weight based on fitness difference
         fitness_diff = abs(p1.fitness - p2.fitness)
         w = 1 - fitness_diff / min(p1.fitness, p2.fitness)
@@ -87,8 +88,8 @@ def heuristic_xo(p1, p2):
         # Loop through each gene
         for i in range(len(p1)):
             # Favor the better parent for that gene
-            if p1[i] == p2[i]: 
-                offspring.append(p1[i]) 
+            if p1[i] == p2[i]:
+                offspring.append(p1[i])
             elif p1.fitness < p2.fitness:
                 offspring.append(p1[i])
             else:
@@ -105,19 +106,43 @@ def heuristic_xo(p1, p2):
                 
         return offspring
 
-    o1, o2 = heuristic_xo_(p1, p2), heuristic_xo_(p1, p2)
+    o1, o2 = get_heuristic_offspring(p1, p2), get_heuristic_offspring(p1, p2)
     return o1, o2
-      
     
-'''if __name__ == '__main__':
-    #p1, p2 = [0, 0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0,0,0,0], [2, 2, 2,2,2, 2, 2,2,2, 2, 2,2,3,3,3,3]
-    #o1, o2 = multi_point_crossover(p1, p2)
-    #o3,o4 = single_point_co(p1, p2)
-    p1 = Individual()
-    p2 = Individual()
-    o1,o2 = heuristic_xo(p1,p2)
-    print(o1, o2)
-    #print(o3, o4)'''
+    
+def heuristic_xo_v1(p1, p2):
+    
+    def get_heuristic_offspring_v1(p1, p2):
+        offspring = []
+        for i in range(len(p1)):
+            if p1[i] == p2[i]:
+                offspring.append(p1[i])  # Inherit the same value from both parents
+            else:
+                # Apply a heuristic rule based on the problem domain
+                # For this example, let's use the average of the two values
+                value = int(round((p1[i] + p2[i]) / 2,0))
+                if value > 3:
+                    value = 3  # Limit the value to the maximum allowed
+                offspring.append(value)
+        return offspring
+
+    o1, o2 = get_heuristic_offspring_v1(p1, p2), get_heuristic_offspring_v1(p1, p2)
+    return o1, o2
+
+def heuristic_xo_v2(p1, p2):
+    
+    def get_heuristic_offspring_v2(p1, p2):
+        offspring = []
+        crossover_probability = 0.5
+        for i in range(len(p1)):
+            if random.random() < crossover_probability:
+                offspring.append(p1[i])  # Select gene from p1
+            else:
+                offspring.append(p2[i])  # Select gene from p2
+        return offspring
+
+    o1, o2 = get_heuristic_offspring_v2(p1, p2), get_heuristic_offspring_v2(p1, p2)
+    return o1, o2
 
 
 
