@@ -60,17 +60,17 @@ def run_experiment(population_size,
 
 # Experiments configuration
 experiments = [
+    [50,100,0.9,0.2,tournament_sel,inversion_mutation,heuristic_xo,False,True,False],
     [50,100,0.9,0.2,tournament_sel,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,single_point_co,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,inversion_mutation,uniform_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,inversion_mutation,uniform_xo,False,True,False],
     
-    [50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,swap_mutation,single_point_co,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,swap_mutation,uniform_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,swap_mutation,arithmetic_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,swap_mutation,single_point_co,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,swap_mutation,uniform_xo,False,True,False],
 
-    [50,100,0.9,0.2,tournament_sel,scramble_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,scramble_mutation,single_point_co,False,True,False],
-    [50,100,0.9,0.2,tournament_sel,scramble_mutation,uniform_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,arithmetic_xo,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,single_point_co,False,True,False],
+    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,uniform_xo,False,True,False],
 ]
 
 # create a list using the columns of the experiments list

@@ -76,30 +76,37 @@ def mask_xo(p1,p2):
     return p1,p2
 
 def heuristic_xo(p1, p2):
-    # Calculate weight based on fitness difference
-    fitness_diff = abs(p1.fitness - p2.fitness)
-    w = 1 - fitness_diff / min(p1.fitness, p2.fitness)
     
-    offspring = []
-    
-    # Loop through each gene
-    for i in range(len(p1)):
-        # Favor the better parent for that gene
-        if p1[i] == p2[i]: 
-            offspring.append(p1[i]) 
-        elif p1.fitness < p2.fitness:
-            offspring.append(p1[i])
-        else:
-            offspring.append(p2[i])
-            
-    # Apply weighted average for genes that differ        
-    for i in range(len(p1)):
-        if p1[i] != p2[i]:
-            offspring[i] = int(abs(round(w * p1[i] + (1-w) * p2[i],0)))
-            
-    return Individual(offspring) 
+    def heuristic_xo_(p1, p2):
+        # Calculate weight based on fitness difference
+        fitness_diff = abs(p1.fitness - p2.fitness)
+        w = 1 - fitness_diff / min(p1.fitness, p2.fitness)
+        
+        offspring = []
+        
+        # Loop through each gene
+        for i in range(len(p1)):
+            # Favor the better parent for that gene
+            if p1[i] == p2[i]: 
+                offspring.append(p1[i]) 
+            elif p1.fitness < p2.fitness:
+                offspring.append(p1[i])
+            else:
+                offspring.append(p2[i])
+                
+        # Apply weighted average for genes that differ        
+        for i in range(len(p1)):
+            if p1[i] != p2[i]:
+                a = w * p1[i] + (1-w) * p2[i]
+                if a > 3:
+                    offspring[i] = 3
+                else:
+                    offspring[i] = int(abs(round(a,0)))
+                
+        return offspring
 
-
+    o1, o2 = heuristic_xo_(p1, p2), heuristic_xo_(p1, p2)
+    return o1, o2
       
     
 '''if __name__ == '__main__':
