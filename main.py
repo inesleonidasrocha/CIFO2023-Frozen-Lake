@@ -42,65 +42,12 @@ def run_experiment(population_size, generations, crossover_probability, mutation
     return iterations_fitness_average, iterations_fitness_std
 
 # Experiments configuration
-experiments = [[50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
-               [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, single_point_xo, False, True, False],
-               [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, heuristic_xo, False, True, False]
+experiments = [
+                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, False],
+                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, True],
 
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, heuristic_xo, False, True, False]
 
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, heuristic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, single_point_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, heuristic_xo, False, True, False]
 
-               # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False]
-
-               # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, swap_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, scramble_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, swap_mutation, arithmetic_xo, True, True, False],
-               # [50, 100, 0.9, 0.2, rank_selection, inversion_mutation, arithmetic_xo, True, True, False]
-
-               # [50, 100, 0.8, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False]
                ]
 
 # Check if there are experiments in the list
@@ -113,11 +60,11 @@ generations = ["gen = " + str(exp[1]) for exp in experiments]
 crossover_probability = ["co = " + str(exp[2]) for exp in experiments]
 mutation_probability = ["mut = " + str(exp[3]) for exp in experiments]
 selection = [exp[4].__name__ for exp in experiments]
-mutation = [exp[5].__name__ for exp in experiments]
-crossover = [exp[6].__name__ for exp in experiments]
-elitism = [exp[7] for exp in experiments]
-replacement = [exp[8] for exp in experiments]
-slippery = [exp[9] for exp in experiments]
+crossover = [exp[5].__name__ for exp in experiments]
+mutation = [exp[6].__name__ for exp in experiments]
+elitism = ["elite = " + str(exp[7]) for exp in experiments]
+replacement = ["repl = " + str(exp[8]) for exp in experiments]
+slippery = ["slip = " + str(exp[9]) for exp in experiments]
 
 variable_list = [population_size, generations, crossover_probability, mutation_probability, 
                  selection, mutation, crossover, elitism, replacement, slippery]
@@ -149,8 +96,8 @@ for exp in experiments:
                                               crossover_probability = exp[2],
                                               mutation_probability = exp[3],
                                               selection = exp[4],
-                                              mutation = exp[5],
-                                              crossover = exp[6],
+                                              crossover = exp[5],
+                                              mutation = exp[6],
                                               elitism = exp[7],
                                               replacement = exp[8],
                                               slippery = exp[9]))

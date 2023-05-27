@@ -1,4 +1,5 @@
-from random import random, uniform, choice
+import random
+from random import uniform, choice
 from operator import attrgetter
 
 def tournament_sel(population, size=4):
