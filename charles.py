@@ -2,16 +2,10 @@ from random import shuffle, choice, sample, random
 from operator import attrgetter
 from copy import deepcopy
 
-
 class Individual:
-    def __init__(
-        self,
-        representation=None,
-        size=None,
-        replacement=True,
-        valid_set=None,
-        slippery=None,
-    ):
+    
+    def __init__(self, representation = None, size = None, replacement = True, valid_set = None, slippery = None):
+        
         if representation is None:
             if replacement is True:
                 self.representation = [choice(valid_set) for i in range(size)]
@@ -40,24 +34,21 @@ class Individual:
         return Individual(self.representation.copy(), self.fitness)
 
     def __repr__(self):
-        return f"Individual(size={len(self.representation)}); Fitness: {self.fitness}"
+        return f"Individual(Size: {len(self.representation)}); Fitness: {self.fitness}"
 
 
 class Population:
+    
     def __init__(self, size, optim, **kwargs):
+     
         self.individuals = []
         self.size = size
         self.optim = optim
         for _ in range(size):
-            self.individuals.append(
-                Individual(
-                    size=kwargs["sol_size"],
-                    replacement=kwargs["replacement"],
-                    valid_set=kwargs["valid_set"],
-                    slippery=kwargs["slippery"],
-                )
-            )
+            self.individuals.append(Individual(size = kwargs["sol_size"], replacement = kwargs["replacement"],
+                                               valid_set = kwargs["valid_set"], slippery = kwargs["slippery"]))
 
+            
     def evolve(self, gens, xo_prob, mut_prob, select, mutate, crossover, elitism):
         
         generations_fitness = []
@@ -67,9 +58,9 @@ class Population:
 
             if elitism:
                 if self.optim == "max":
-                    elite = deepcopy(max(self.individuals, key=attrgetter("fitness")))
+                    elite = deepcopy(max(self.individuals, key = attrgetter("fitness")))
                 elif self.optim == "min":
-                    elite = deepcopy(min(self.individuals, key=attrgetter("fitness")))
+                    elite = deepcopy(min(self.individuals, key = attrgetter("fitness")))
 
             while len(new_pop) < self.size:
                 parent1, parent2 = select(self), select(self)
@@ -90,13 +81,13 @@ class Population:
 
             if elitism:
                 if self.optim == "max":
-                    worst = min(new_pop, key=attrgetter("fitness"))
+                    worst = min(new_pop, key = attrgetter("fitness"))
                     if elite.fitness > worst.fitness:
                         new_pop.pop(new_pop.index(worst))
                         new_pop.append(elite)
 
                 elif self.optim == "min":
-                    worst = max(new_pop, key=attrgetter("fitness"))
+                    worst = max(new_pop, key = attrgetter("fitness"))
                     if elite.fitness < worst.fitness:
                         new_pop.pop(new_pop.index(worst))
                         new_pop.append(elite)
@@ -104,10 +95,10 @@ class Population:
             self.individuals = new_pop
 
             if self.optim == "max":
-                max_fitness = max(self, key=attrgetter("fitness")).fitness
+                max_fitness = max(self, key = attrgetter("fitness")).fitness
                 generations_fitness.append(max_fitness)
             elif self.optim == "min":
-                min_fitness = min(self, key=attrgetter("fitness")).fitness
+                min_fitness = min(self, key = attrgetter("fitness")).fitness
                 generations_fitness.append(max_fitness)
                 
         return generations_fitness
