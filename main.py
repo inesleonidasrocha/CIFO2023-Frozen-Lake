@@ -26,7 +26,7 @@ def run_experiment(population_size,
                    ):
 
     iterations_fitness = []
-    for i in range(100):
+    for i in range(50):
         start_time = time.time()
         
         # Create a population
@@ -60,17 +60,15 @@ def run_experiment(population_size,
 
 # Experiments configuration
 experiments = [
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo,False,True,False],
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo_v1,False,True,False],
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,heuristic_xo_v2,False,True,False],
-    
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,arithmetic_xo,False,True,False],
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,single_point_co,False,True,False],
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,uniform_xo,False,True,False],
-
-    [50,100,0.9,0.2,roulette_selection,inversion_mutation,multi_point_crossover,False,True,False],
-    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,single_point_co,False,True,False],
-    #[50,100,0.9,0.2,tournament_sel,scramble_mutation,uniform_xo,False,True,False],
+    [50, 100, 0.8, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, tournament_sel, swap_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, tournament_sel, inversion_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, roulette_selection, scramble_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, roulette_selection, swap_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, roulette_selection, inversion_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, rank_selection, scramble_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, rank_selection, swap_mutation, arithmetic_xo, True, True, False],
+    [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, True, True, False]
 ]
 
 # create a list using the columns of the experiments list
@@ -101,7 +99,7 @@ label_list = []
 for l in range(len(selection_list[0])):
     label = ([v[l] for v in selection_list])
     # create a string with the elements in the list
-    label = "/".join(label)
+    label = " & ".join(label)
     # insert label in a list
     label_list.append(label)
     
@@ -132,8 +130,6 @@ plt.ylabel("Fitness")
 plt.title("Fitness by Generation")
 # set the left and right margins
 plt.subplots_adjust(left=0.08, right=0.73)
-# add a legend
-#plt.legend([f"{label_list[i]}" for i in range(len(label_list))],bbox_to_anchor=(1, 0.5))
 # add a legend outside the plot
 plt.legend(label_list, bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
 # show the plot
