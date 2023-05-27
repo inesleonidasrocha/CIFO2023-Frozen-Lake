@@ -16,7 +16,7 @@ def run_experiment(population_size, generations, crossover_probability, mutation
                    crossover, elitism, replacement, slippery, sol_size = 16, valid_set = [0, 1, 2, 3]):
 
     iterations_fitness = []
-    for i in range(50):
+    for i in range(5):
         start_time = time.time()
         
         # Create a population
@@ -41,8 +41,8 @@ def run_experiment(population_size, generations, crossover_probability, mutation
     return iterations_fitness_average, iterations_fitness_std
 
 # Experiments configuration
-experiments = [# [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
-               # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, single_point_xo, False, True, False],
+experiments = [[50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmetic_xo, False, True, False],
+               [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, single_point_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, multi_point_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, arithmetic_xo, False, True, False],
                # [50, 100, 0.9, 0.2, tournament_sel, swap_mutation, single_point_xo, False, True, False],
@@ -150,7 +150,8 @@ for exp in experiments:
                                               elitism = exp[7],
                                               replacement = exp[8],
                                               slippery = exp[9]))
-    print(f"Average fitness: {fitness_experiments[-1][0]}")
+    fitness_overall = int(round(np.mean(fitness_experiments[-1][0]),0))
+    print(f"Average fitness: {fitness_overall}")
     print(f"Experiment {experiments.index(exp)+1} finished")
     print("--------------------------------------------------")
 
