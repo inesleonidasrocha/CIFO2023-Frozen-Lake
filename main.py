@@ -102,6 +102,10 @@ experiments = [# [50, 100, 0.9, 0.2, tournament_sel, scramble_mutation, arithmet
                # [50, 100, 0.8, 0.2, rank_selection, inversion_mutation, arithmetic_xo, False, True, False]
                ]
 
+# Check if there are experiments in the list
+if len(experiments) == 0:
+    raise Exception("You need to add experiments to the experiments list.")
+
 # List using the columns of the experiments list, this is done to make the labels more readable
 population_size = ["pop = " + str(exp[0]) for exp in experiments]
 generations = ["gen = " + str(exp[1]) for exp in experiments]
@@ -118,16 +122,21 @@ variable_list = [population_size, generations, crossover_probability, mutation_p
                  selection, mutation, crossover, elitism, replacement, slippery]
 
 selection_list = []
-for variable in variable_list:
-    if len(set(variable)) >= 2:
-        selection_list.append(variable)
-
 label_list = []
-for l in range(len(selection_list[0])):
-    label = ([v[l] for v in selection_list])
-    label = " & ".join(label)
-    label_list.append(label)
     
+# Check if some variables in variable_list have different values in the experiments
+if any(len(set(variable)) > 1 for variable in variable_list):
+    for variable in variable_list:
+        if len(set(variable)) >= 2:
+            selection_list.append(variable)
+
+    for l in range(len(selection_list[0])):
+        label = ([v[l] for v in selection_list])
+        label = " & ".join(label)
+        label_list.append(label)
+else:
+    label_list = ["Experiment " + str(len(experiments))]
+
 # Run the experiments
 for exp in experiments:
     print(f"Running experiment: {experiments.index(exp) + 1}")
