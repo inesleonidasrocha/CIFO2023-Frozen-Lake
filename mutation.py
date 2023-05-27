@@ -1,4 +1,5 @@
-from random import random, randint, sample
+import random
+from random import randint, sample
 
 def scramble_mutation(individual):
     """
