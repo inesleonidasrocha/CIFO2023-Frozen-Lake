@@ -2,9 +2,23 @@
 import gymnasium as gym
 
 from charles import Population, Individual
+"""
+Gym Documentation: 
+https://www.gymlibrary.dev/environments/toy_text/frozen_lake/
+"""
 
 def get_fitness(self, slippery):
+    """
+    Evaluates the fitness of an individual on the gym 
+    FrozenLake environment.
     
+    Args: 
+        self (Individual): The individual to evaluate
+        slippery (bool): True if slippery ice, False otherwise
+    
+    Returns:
+        int: The fitness score  
+    """
     # Render mode is only for visualization purposes, so it can be removed
     # env = gym.make('FrozenLake-v1', render_mode="human", is_slippery=False)
     
@@ -19,7 +33,7 @@ def get_fitness(self, slippery):
     Valid = [0,1,2,3,4,6,8,9,10,13,14]
     Goal = [15]
 
-    # Punishment
+    # Punishment for falling in a hole.
     punishment = [-273 + 16 * i if i > 0 else 0 for i in range(len(self.representation))]  
 
     # Simulate the individual's actions in the environment
