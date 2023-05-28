@@ -2,8 +2,10 @@
  Master in Data Science and Advanced Analytics<br>
  NOVA Information Management School<br>
  May, 2023
+ 
 
 <h3>Contact:</h3>
+Group 4:
 
 Alex Santander, 20220658@novaims.unl.pt<br>
 Carlota Carneiro, m20210684@novaims.unl.pt<br>
@@ -18,7 +20,7 @@ This project focuses on solving the Frozen Lake Problem (FLP) using Genetic Algo
 ![Alt Text](https://gymnasium.farama.org/_images/frozen_lake.gif)
 
 <h3>Files:</h3>
-charles.py - Implementation of individuals and populations, and facilitates the evolutionary process through selection, crossover, and mutation.<br>
+**charles.py**  - Implementation of individuals and populations, and facilitates the evolutionary process through selection, crossover, and mutation.<br>
 FL_fitness.py - Defining the fitness function for the FLP using the Gym library.<br>
 selection.py - Implementation of selection algorithms: Tournament, Roulette and Rank.<br>
 crossover.py - Implementation of crossover algorithms: Arithmetic, Single Point, Multi-Point, Uniform, Uniform Mask and Heuristic.<br> mutation.py - Implementation of mutation algorithms: Scramble, Swap and Inversion.<br>
