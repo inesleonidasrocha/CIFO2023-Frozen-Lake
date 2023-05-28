@@ -1,4 +1,4 @@
-﻿<a name="br1"></a>Master in Data Science and Advanced Analytics, NOVA Information Management School
+﻿<h1>Master in Data Science and Advanced Analytics, NOVA Information Management School</h1>
  
  COMPUTATIONAL INTELLIGENCE FOR OPTIMIZATION
 
