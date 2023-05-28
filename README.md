@@ -5,10 +5,10 @@
 
 <h3>Contact:</h3>
 
-Alex Santander, m20210684@novaims.unl.pt<br>
+Alex Santander, 20220658@novaims.unl.pt<br>
 Carlota Carneiro, m20210684@novaims.unl.pt<br>
-Inês Rocha, m20210684@novaims.unl.pt<br>
-Susana Dias, m20210684@novaims.unl.pt
+Inês Rocha, 20220052@novaims.unl.pt<br>
+Susana Dias, 20220198@novaims.unl.pt
 
 
 <h2>PROJECT DESCRIPTION</h2>
