@@ -24,7 +24,7 @@ def run_experiment(population_size, generations, crossover_probability, mutation
         pop = Population(size = population_size, optim = "max", sol_size = sol_size, valid_set = valid_set,
                          replacement = replacement, slippery = slippery)
 
-        # Evolve the population for 30 iterations
+        # Evolve the population for 100 iterations
         iterations_fitness.append(pop.evolve(gens = generations, xo_prob=crossover_probability, mut_prob = mutation_probability,
                                              select=selection, mutate = mutation, crossover = crossover, elitism = elitism))
         
@@ -41,7 +41,10 @@ def run_experiment(population_size, generations, crossover_probability, mutation
 
     return iterations_fitness_average, iterations_fitness_std
 
-# Experiments configuration
+# Experiments configurations
+# Here we can add new experiments to test all permutations for the FLP
+#[Pop size, Gens, xo_prob, mut_prob, selection method, xo method, mutation method,  
+# Elitism, Replacement, Slippery]
 experiments = [
                 [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, scramble_mutation, True, True, True],
                 [50, 100, 0.9, 0.2, tournament_sel, arithmetic_xo, scramble_mutation, True, True, False],
@@ -112,7 +115,9 @@ for exp in experiments:
     print("--------------------------------------------------")
     
 print(df_results)
-    
+
+# The commented code, plots the average fitness and standard deviation  
+# for multiple experiments  
 '''# Plot the results
 # Extract avg and std values from the fitness_experiments
 avg = [exp[0] for exp in fitness_experiments]
@@ -149,9 +154,7 @@ plt.subplots_adjust(left=0.08, right=0.73)
 plt.show()'''
 
 
-
-# Plot the fitness by experiment
-
+#  This code plots the average fitness and for multiple experiments  
 plt.subplots(figsize=(12, 6))
 
 avg = [exp[0] for exp in fitness_experiments]
@@ -166,5 +169,5 @@ plt.title("Fitness Lanscape")
 plt.subplots_adjust(left=0.08, right=0.6)
 # Add a legend outside the plot
 plt.legend(label_list, bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
-# show the plot
+# Shows the plot
 plt.show()
