@@ -18,4 +18,6 @@ This project focuses on solving the Frozen Lake Problem using Genetic Algorithm 
 <h3>Files:</h3>
 charles.py - serves as a foundation for implementing individuals and populations, and facilitates the evolutionary process through selection, crossover, and mutation.<br>
 FL_fitness.py - focuses on defining the fitness function for the FLP using the Gym library.<br>
-
+selection.py - we have implemented three distinct selection algorithms, namely Tournament, Roulette and Rank.<br>
+crossover.py - we implemented six crossover algorithms – Arithmetic, Single Point, Multi-Point, Uniform, Uniform Mask and Heuristic.<br> mutation.py - we have incorporated three mutation algorithms, namely Scramble, Swap and Inversion.<br>
+main.py - experiments by applying various configurations of genetic algorithms to solve the FLP.
