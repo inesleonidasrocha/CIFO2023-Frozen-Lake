@@ -44,10 +44,7 @@ def run_experiment(population_size, generations, crossover_probability, mutation
 # Experiments configuration
 experiments = [
                 [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, False],
-                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, True],
-
-
-
+                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, True]
                ]
 
 # Check if there are experiments in the list
