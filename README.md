@@ -30,7 +30,7 @@ The FLP is a classic grid-based navigation problem - see *gif* below - often use
 
 The objective of this problem is for the agent to find the optimal path from its starting position to the goal, while avoiding the holes. The Frozen Lake problem serves as a simple yet challenging environment to study and develop algorithms for navigation, decision-making, and learning in artificial intelligence.
 
-![Alt Text](https://gymnasium.farama.org/_images/frozen_lake.gif)
+![Alt Text](https://res.cloudinary.com/dyd911kmh/image/upload/v1666973295/Q_Learning_Final_3344d28087.gif)
 
 <h3>Files:</h3>
 
