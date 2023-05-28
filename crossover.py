@@ -1,4 +1,5 @@
-from random import randint, sample, uniform, random
+import random
+from random import randint, sample, uniform
 import numpy as np
 
 def arithmetic_xo(p1, p2):
