@@ -17,7 +17,7 @@ def run_experiment(population_size, generations, crossover_probability, mutation
                    crossover, elitism, replacement, slippery, sol_size = 16, valid_set = [0, 1, 2, 3]):
 
     iterations_fitness = []
-    for i in range(5):
+    for i in range(100):
         start_time = time.time()
         
         # Create a population
@@ -43,8 +43,10 @@ def run_experiment(population_size, generations, crossover_probability, mutation
 
 # Experiments configuration
 experiments = [
-                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, False],
-                [50, 100, 0.9, 0.2, roulette_selection, arithmetic_xo, swap_mutation, False, True, True]
+                [50, 100, 0.9, 0.2, rank_selection, arithmetic_xo, scramble_mutation, True, True, True],
+                [50, 100, 0.9, 0.2, rank_selection , arithmetic_xo, scramble_mutation, True, True, False],
+                [50, 100, 0.9, 0.2, rank_selection, arithmetic_xo, scramble_mutation, False, True, True],
+                [50, 100, 0.9, 0.2, rank_selection , arithmetic_xo, scramble_mutation, False, True, False]
                ]
 
 # Check if there are experiments in the list

@@ -1,5 +1,5 @@
-import gym
-# import gymnasium
+#import gym
+import gymnasium as gym
 
 from charles import Population, Individual
 
