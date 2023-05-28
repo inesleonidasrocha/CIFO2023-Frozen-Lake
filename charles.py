@@ -99,7 +99,7 @@ class Population:
                 generations_fitness.append(max_fitness)
             elif self.optim == "min":
                 min_fitness = min(self, key = attrgetter("fitness")).fitness
-                generations_fitness.append(max_fitness)
+                generations_fitness.append(min_fitness)
                 
         return generations_fitness
 
