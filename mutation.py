@@ -1,5 +1,12 @@
 import random
 from random import sample
+"""
+Mutation Methods
+
+References: 
+https://www.geeksforgeeks.org/mutation-algorithms-for-string-manipulation-ga/
+https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.htm
+"""
 
 def scramble_mutation(individual):
     """

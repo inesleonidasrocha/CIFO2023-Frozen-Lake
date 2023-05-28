@@ -1,6 +1,12 @@
 import random
 from random import uniform, choice
 from operator import attrgetter
+"""
+Selection Methods
+
+References: 
+https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_parent_selection.htm
+"""
 
 def tournament_sel(population, size=4):
     """
