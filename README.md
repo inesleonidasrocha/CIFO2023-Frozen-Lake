@@ -1,5 +1,6 @@
-﻿<a name="br1"></a>COMPUTATIONAL INTELLIGENCE FOR
- OPTIMIZATION
+﻿<a name="br1"></a>Master in Data Science and Advanced Analytics, NOVA Information Management School
+ 
+ COMPUTATIONAL INTELLIGENCE FOR OPTIMIZATION
 
 22/23 PROJECT GUIDELINES
 
