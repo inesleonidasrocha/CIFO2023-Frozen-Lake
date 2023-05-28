@@ -1,5 +1,5 @@
-﻿<h1>Master in Data Science and Advanced Analytics, NOVA Information Management School</h1>
- 
+﻿<h1>Master in Data Science and Advanced Analytics</h1>
+ NOVA Information Management School<br>
  COMPUTATIONAL INTELLIGENCE FOR OPTIMIZATION
 
 22/23 PROJECT GUIDELINES
