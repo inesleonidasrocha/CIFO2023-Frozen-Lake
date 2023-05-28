@@ -13,7 +13,9 @@ Susana Dias, 20220198@novaims.unl.pt
 
 <h2>PROJECT DESCRIPTION</h2>
 
-This project focuses on solving the Frozen Lake Problem (FLP) using Genetic Algorithm (GA) techniques. For the development of the project, we implemented and evaluated various selection, crossover, and mutation methods within the framework of GA for problem-solving. The main objective of this was to assess their performance, convergence, and effectiveness and compare their efficacy in achieving optimal solutions.
+This project focuses on solving the Frozen Lake Problem (FLP) using Genetic Algorithm (GA) techniques. For the development of the project, we implemented and evaluated various selection, crossover, and mutation methods within the framework of GA for problem-solving. The main objective of this was to assess their performance, convergence, and effectiveness and compare their efficacy in achieving optimal solutions. 
+
+![Alt Text](https://gymnasium.farama.org/_images/frozen_lake.gif)
 
 <h3>Files:</h3>
 charles.py - Implementation of individuals and populations, and facilitates the evolutionary process through selection, crossover, and mutation.<br>
@@ -21,3 +23,5 @@ FL_fitness.py - Defining the fitness function for the FLP using the Gym library.
 selection.py - Implementation of selection algorithms: Tournament, Roulette and Rank.<br>
 crossover.py - Implementation of crossover algorithms: Arithmetic, Single Point, Multi-Point, Uniform, Uniform Mask and Heuristic.<br> mutation.py - Implementation of mutation algorithms: Scramble, Swap and Inversion.<br>
 main.py - Applying various configurations of genetic algorithms to solve the FLP.
+
+
